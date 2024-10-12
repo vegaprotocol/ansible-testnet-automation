@@ -47,3 +47,8 @@
 
 - name: Install dasel
   ansible.builtin.import_tasks: dasel.yaml
+
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{- vega_common_custom_hostname -}}"
+  when: vega_common_custom_hostname | length > 0
