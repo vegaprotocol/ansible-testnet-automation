@@ -10,7 +10,9 @@
 
 - name: Restart blockexplorer
   ansible.builtin.service:
-    state: "{{- 'restarted' if vega_core_run_network else 'stopped' -}}"
+    # it may be started anytime and during first startup it initialize the database, 
+    # so it should be started as soon as possible ideally before the vegavisor
+    state: "started"
     daemon_reload: true
     enabled: true
     name: blockexplorer
